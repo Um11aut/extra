@@ -3,16 +3,17 @@
 #include "src/LinkedList.hpp"
 #include "src/Node.hpp"
 
+
 int main() {
-  list::linked<int> list(1,2,3,4,5);
-  
-  std::cout << "P C N" << std::endl;
-  list.print();
+  list::linked<int> list = {1,2,3,4,5,6,7,8,9};
 
-  list.remove(1);
-  list.remove(list.size() - 1);
-  list.print();
+  list::print(list);
 
+  std::cout << std::endl;
+
+  list.dublicateValues();
+  list[10] = 5;
+  list::print(list);
 
   Node::Ptr root = std::make_unique<Node>('+');
   root->setFirst(std::make_unique<Node>('*'));
@@ -20,15 +21,11 @@ int main() {
   root->getPair().first->getPair().first->setFirst(std::make_unique<Node>('1'));
   root->getPair().first->getPair().first->setSecond(std::make_unique<Node>('2'));
 
-  root->setSecond(std::make_unique<Node>('*'));
-  root->getPair().second->setFirst(std::make_unique<Node>('+'));
-  root->getPair().second->getPair().first->setFirst(std::make_unique<Node>('4'));
-  root->getPair().second->getPair().first->setSecond(std::make_unique<Node>('3'));
+  Node::Ptr root1 = std::make_unique<Node>('+');
+  root1->setFirst(std::make_unique<Node>('*'));
+  root1->getPair().first->setFirst(std::make_unique<Node>('+'));
+  root1->getPair().first->getPair().first->setFirst(std::make_unique<Node>('1'));
+  root1->getPair().first->getPair().first->setSecond(std::make_unique<Node>('2'));
 
-  print(root);
-
-  auto divided = nodeDivider(root, '+');
-
-  print(divided.first);
-  print(divided.second);
+  std::cout << areEqual(root, root1) << std::endl;
 }
